@@ -1,4 +1,3 @@
-
 class Cliente:
     def __init__(self, nome, email, senha):
         self.nome = nome
@@ -7,6 +6,18 @@ class Cliente:
         self.carros_interesse = []
         self.carros_carrinho = []
         self.notificacoes = []
+        self.nif = None
+        self.tipo_veiculo = None
+        self.opcoes_pagamento = {
+            'paypal': False,
+            'visa': False,
+            'prestacoes': False,
+            'morada_faturacao': None,
+            'detalhes_compra': None,
+            'pedir_entrega': False
+        }
+        self.carros_recentes = []
+        self.compras_realizadas = []
 
     def adicionar_carro_interesse(self, carro):
         self.carros_interesse.append(carro)
@@ -34,6 +45,39 @@ class Cliente:
     def reservar_veiculo(self, carro):
         print(f"Veículo {carro.marca} {carro.modelo} reservado!")
 
+    def adicionar_nif(self, nif):
+        self.nif = nif
+        print("NIF adicionado com sucesso!")
+
+    def escolher_tipo_veiculo(self, tipo):
+        self.tipo_veiculo = tipo
+        print(f"Tipo de veículo escolhido: {tipo}")
+
+    def configurar_opcoes_pagamento(self, opcoes):
+        for opcao, valor in opcoes.items():
+            if opcao in self.opcoes_pagamento:
+                self.opcoes_pagamento[opcao] = valor
+        print("Opções de pagamento configuradas com sucesso!")
+
+    def adicionar_detalhes_compra(self, detalhes):
+        self.opcoes_pagamento['detalhes_compra'] = detalhes
+        print("Detalhes para a compra adicionados com sucesso!")
+
+    def escolher_entrega(self):
+        self.opcoes_pagamento['pedir_entrega'] = True
+        print("Opção de entrega selecionada!")
+
+    def ver_carros_recentes(self):
+        print("Carros/Motos Recém-Visualizados:")
+        for carro in self.carros_recentes:
+            print(f"{carro.marca} {carro.modelo}")
+
+    def ver_compras_realizadas(self):
+        print("Compras Realizadas:")
+        for compra in self.compras_realizadas:
+            print(f"{compra.marca} {compra.modelo}")
+
+# Carro permanece igual ao código anterior
 class Carro:
     def __init__(self, marca, modelo):
         self.marca = marca
@@ -45,29 +89,25 @@ def main():
     car2 = Carro("Honda", "Civic")
     car3 = Carro("Tesla", "Model S")
 
-    # exemplo de cliente enquanto n ha base de dados
+    # exemplo de cliente enquanto não há base de dados
     cliente = Cliente("João", "joao@email.com", "senha123")
 
     # adicionar carros ao cliente de exemplo
-    print ("Interesses:")
     cliente.adicionar_carro_interesse(car1)
     cliente.adicionar_carro_interesse(car2)
     cliente.adicionar_carro_interesse(car3)
-    print("\n")
 
     # Adicionar a parte do carrinho
-    print ("Carrinho")
     cliente.adicionar_ao_carrinho(car1)
     cliente.adicionar_ao_carrinho(car3)
-    print("\n")
 
-    # Mostrando os carros q interessam ao utilizador
+    # Mostrando os carros que interessam ao utilizador
     print("\n")
     print(f"Carros de interesse do cliente {cliente.nome}:")
     for carro in cliente.carros_interesse:
         print(f"{carro.marca} {carro.modelo}")
 
-    # carros no carrinho
+    # Carros no carrinho
     print("\n")
     print(f"\nCarros no carrinho do cliente {cliente.nome}:")
     for carro in cliente.carros_carrinho:
@@ -84,6 +124,8 @@ def main():
     cliente.marcar_test_drive(car4)
 
     cliente.reservar_veiculo(car2)
+
+    # Adicionando mais funcionalidades conforme necessário
 
 if __name__ == "__main__":
     main()
