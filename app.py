@@ -1,4 +1,6 @@
+import datetime
 import hashlib
+
 
 class Cliente:
     def __init__(self, nome, email, senha):
@@ -20,6 +22,7 @@ class Cliente:
         }
         self.carros_recentes = []
         self.compras_realizadas = []
+        self.dia_reserva = None
 
     def adicionar_carro_interesse(self, carro):
         self.carros_interesse.append(carro)
@@ -36,6 +39,11 @@ class Cliente:
     def alterar_email(self, novo_email):
         self.email = novo_email
         print("Email alterado com sucesso!")
+
+    def reservar_viatura(self, dia_reserva, carro):
+        self.dia_reserva = dia_reserva
+        self.carro_reserva = carro
+        print(f"Carro {self.carro_reserva} reservado para o dia {self.dia_reserva} com sucesso!")
 
     def receber_oferta(self, oferta):
         self.notificacoes.append(oferta)
@@ -79,11 +87,13 @@ class Cliente:
         for compra in self.compras_realizadas:
             print(f"{compra.marca} {compra.modelo}")
 
+
 # Carro permanece igual ao código anterior
 class Carro:
     def __init__(self, marca, modelo):
         self.marca = marca
         self.modelo = modelo
+
 
 def main():
     # Carros de exemplo
@@ -115,6 +125,11 @@ def main():
     for carro in cliente.carros_carrinho:
         print(f"{carro.marca} {carro.modelo}")
 
+    # Reserva do veiculo
+    print("Qual o dia para a reserva e o veiculo?")
+    dia_reserva = datetime.date(2023, 3, 12)
+    cliente.reservar_viatura(dia_reserva, car1)
+
     # Exemplo de uso dos novos métodos
     cliente.alterar_senha("novaSenha456")
     cliente.alterar_email("novo@email.com")
@@ -128,6 +143,7 @@ def main():
     cliente.reservar_veiculo(car2)
 
     # Adicionando mais funcionalidades conforme necessário
+
 
 if __name__ == "__main__":
     main()
