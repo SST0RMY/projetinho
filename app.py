@@ -4,6 +4,31 @@ import hashlib
 
 class Cliente:
     def __init__(self, nome, email, senha):
+
+        """
+               Classe Cliente representa um cliente da loja de veículos.
+
+               Args:
+               - nome (str): Nome do cliente.
+               - email (str): Endereço de email do cliente.
+               - senha (str): Senha do cliente para acesso à conta.
+
+               Atributos:
+               - nome (str): Nome do cliente.
+               - email (str): Endereço de email do cliente.
+               - senha (hash): Senha do cliente convertida para hash usando MD5.
+               - carros_interesse (list): Lista de carros que o cliente se interessa.
+               - carros_carrinho (list): Lista de carros no carrinho do cliente.
+               - notificacoes (list): Lista de notificações recebidas pelo cliente.
+               - nif (str): Número de identificação fiscal do cliente.
+               - tipo_veiculo (str): Tipo de veículo preferido pelo cliente.
+               - opcoes_pagamento (dict): Opções de pagamento disponíveis para o cliente.
+               - detalhes_pagamento (dict): Detalhes de pagamento selecionados pelo cliente.
+               - carros_recentes (list): Lista de carros recentemente visualizados pelo cliente.
+               - compras_realizadas (list): Lista de compras já realizadas pelo cliente.
+               - dia_reserva (datetime): Data para reserva de um veículo.
+               """
+
         self.nome = nome
         self.email = email
         self.senha = hashlib.md5(senha.enconde())
@@ -29,12 +54,27 @@ class Cliente:
         self.dia_reserva = None
 
     def adicionar_carro_interesse(self, carro):
+        """
+                Adiciona um carro à lista de carros de interesse do cliente.
+
+                Args:
+                - carro (Carro): Objeto Carro a ser adicionado à lista de interesse.
+                """
+
         self.carros_interesse.append(carro)
         print("Carro adicionado aos interesses!")
 
 
 
     def adicionar_ao_carrinho(self, carro):
+
+        """
+                Adiciona um carro ao carrinho de compras do cliente.
+
+                Args:
+                - carro (Carro): Objeto Carro a ser adicionado ao carrinho.
+                """
+
         self.carros_carrinho.append(carro)
         print("Carro adicionado ao carrinho!")
 
@@ -96,6 +136,18 @@ class Cliente:
 
 # Carro permanece igual ao código anterior
 class Carro:
+    """
+            Classe Carro representa um veículo disponível na loja.
+
+            Args:
+            - marca (str): Marca do carro.
+            - modelo (str): Modelo do carro.
+
+            Atributos:
+            - marca (str): Marca do carro.
+            - modelo (str): Modelo do carro.
+            """
+
     def __init__(self, marca, modelo):
         self.marca = marca
         self.modelo = modelo
