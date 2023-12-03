@@ -15,10 +15,14 @@ class Cliente:
         self.opcoes_pagamento = {
             'paypal': False,
             'visa': False,
-            'prestacoes': False,
+            'mastercard': False
+        }
+        self.detalhes_pagamento = {
+            'opcao_pagamento': None,
             'morada_faturacao': None,
             'detalhes_compra': None,
-            'pedir_entrega': False
+            'prestacoes': False,
+            'pedir entrega': False,
         }
         self.carros_recentes = []
         self.compras_realizadas = []
@@ -27,6 +31,8 @@ class Cliente:
     def adicionar_carro_interesse(self, carro):
         self.carros_interesse.append(carro)
         print("Carro adicionado aos interesses!")
+
+
 
     def adicionar_ao_carrinho(self, carro):
         self.carros_carrinho.append(carro)
@@ -63,18 +69,18 @@ class Cliente:
         self.tipo_veiculo = tipo
         print(f"Tipo de veículo escolhido: {tipo}")
 
-    def configurar_opcoes_pagamento(self, opcoes):
+    def configurar_detalhes_pagamento(self, opcoes):
         for opcao, valor in opcoes.items():
-            if opcao in self.opcoes_pagamento:
-                self.opcoes_pagamento[opcao] = valor
+            if opcao in self.detalhes_pagamento:
+                self.detalhes_pagamento[opcao] = valor
         print("Opções de pagamento configuradas com sucesso!")
 
     def adicionar_detalhes_compra(self, detalhes):
-        self.opcoes_pagamento['detalhes_compra'] = detalhes
+        self.detalhes_pagamento['detalhes_compra'] = detalhes
         print("Detalhes para a compra adicionados com sucesso!")
 
     def escolher_entrega(self):
-        self.opcoes_pagamento['pedir_entrega'] = True
+        self.detalhes_pagamento['pedir_entrega'] = True
         print("Opção de entrega selecionada!")
 
     def ver_carros_recentes(self):
