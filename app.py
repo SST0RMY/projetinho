@@ -1,8 +1,10 @@
+import hashlib
+
 class Cliente:
     def __init__(self, nome, email, senha):
         self.nome = nome
         self.email = email
-        self.senha = senha
+        self.senha = hashlib.md5(senha.enconde())
         self.carros_interesse = []
         self.carros_carrinho = []
         self.notificacoes = []
@@ -28,7 +30,7 @@ class Cliente:
         print("Carro adicionado ao carrinho!")
 
     def alterar_senha(self, nova_senha):
-        self.senha = nova_senha
+        self.senha = hashlib.md5(nova_senha.encode())
         print("Senha alterada com sucesso!")
 
     def alterar_email(self, novo_email):
